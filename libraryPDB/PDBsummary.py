@@ -1,11 +1,11 @@
 from typing import Dict
-from PDBdescriptors import (
+from .PDBdescriptors import (
     num_residues, num_atoms,
     aa_composition, glycine_ratio, hydrophobic_ratio,
     radius_of_gyration, max_ca_distance, missing_residue_ratio, secondary_structure_ratio, compactness_index, ca_density
 )
 
-from PDBquality import (
+from .PDBquality import (
     has_ca_only, has_multiple_models, has_altlocs, num_chains
 )
 

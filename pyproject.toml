@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libraryPDB"
+version = "0.1.0"
+description = "Lightweight Python library for large-scale PDB structural analysis"
+authors = [
+    { name="Jadot Cédric", email="cedricjadot@msn.com" }
+]
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://github.com/CJ438837/libraryPDB"

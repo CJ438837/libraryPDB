@@ -1,0 +1,16 @@
+LICENSE.txt
+README.md
+pyproject.toml
+setup.py
+libraryPDB/PDBdescriptors.py
+libraryPDB/PDBio_utils.py
+libraryPDB/PDBparser.py
+libraryPDB/PDBquality.py
+libraryPDB/PDBsearch_utils.py
+libraryPDB/PDBsummary.py
+libraryPDB/__init__.py
+libraryPDB.egg-info/PKG-INFO
+libraryPDB.egg-info/SOURCES.txt
+libraryPDB.egg-info/dependency_links.txt
+libraryPDB.egg-info/requires.txt
+libraryPDB.egg-info/top_level.txt

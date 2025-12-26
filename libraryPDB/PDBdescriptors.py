@@ -1,11 +1,13 @@
 import math
 from collections import Counter
 from typing import Dict, List, Tuple
+import re
 
 def _parse_ca_atoms(pdb_file: str) -> List[Tuple[str, int, float, float, float]]:
     """
-    Extrait les atomes CA :
+    Extrait les atomes CA de manière robuste :
     retourne [(resname, resid, x, y, z), ...]
+    Ignore les résidus ou coordonnées mal formatées
     """
     ca_atoms = []
 
@@ -17,12 +19,24 @@ def _parse_ca_atoms(pdb_file: str) -> List[Tuple[str, int, float, float, float]]
                 continue
 
             resname = line[17:20].strip()
-            resid = int(line[22:26])
-            x = float(line[30:38])
-            y = float(line[38:46])
-            z = float(line[46:54])
+            
+            # numéro de résidu robuste
+            resid_str = line[22:26].strip()
+            match = re.match(r"(\d+)", resid_str)
+            if not match:
+                continue
+            res_id = int(match.group(1))
 
-            ca_atoms.append((resname, resid, x, y, z))
+            # coordonnées robustes
+            coords_str = line[30:54].split()
+            if len(coords_str) < 3:
+                continue
+            try:
+                x, y, z = map(float, coords_str[:3])
+            except ValueError:
+                continue
+
+            ca_atoms.append((resname, res_id, x, y, z))
 
     return ca_atoms
 
@@ -116,6 +130,7 @@ from typing import List, Tuple
 def _parse_ca_coords(pdb_file: str) -> List[Tuple[float, float, float]]:
     """
     Retourne les coordonnées (x,y,z) des atomes CA
+    Robuste aux colonnes mal alignées
     """
     ca_coords = []
     with open(pdb_file) as f:
@@ -124,9 +139,13 @@ def _parse_ca_coords(pdb_file: str) -> List[Tuple[float, float, float]]:
                 continue
             if line[12:16].strip() != "CA":
                 continue
-            x = float(line[30:38])
-            y = float(line[38:46])
-            z = float(line[46:54])
+            coords_str = line[30:54].split()
+            if len(coords_str) < 3:
+                continue
+            try:
+                x, y, z = map(float, coords_str[:3])
+            except ValueError:
+                continue
             ca_coords.append((x, y, z))
     return ca_coords
 

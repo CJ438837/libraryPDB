@@ -5,14 +5,18 @@ setup(
     version="0.1.0",
     packages=find_packages(),
     install_requires=[
-        "requests",
-        "typing",
-        "collections",
-        "os",
-        "math"
+        "requests"
     ],
-    python_requires='>=3.8',
+    license="MIT",
     author="Cédric Jadot",
-    description="Python library for manipulating and analyzing PDB files",
-    url="https://github.com/cj438837/libraryPDB",  # si tu mets sur GitHub
+    author_email="cedricjadot@msn.com",
+    description="Lightweight Python library for large-scale PDB structural analysis",
+    url="https://github.com/CJ438837/libraryPDB",
+    long_description=open("README.md", encoding="utf-8").read(),
+    long_description_content_type="text/markdown",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
 )
