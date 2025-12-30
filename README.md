@@ -214,44 +214,6 @@ normalize_chain_ids("input.pdb", "normalized_chains.pdb")
 
 ```
 
-🔢 reindex_residues
-
-Reindex residues to a continuous numbering starting at 1.
-
-This function removes:
-
-Gaps
-
-Insertions
-
-Non-standard residue numbering
-
-while preserving residue order within each chain.
-
-Why this matters
-
-Simplifies residue-wise comparisons
-
-Avoids indexing conflicts in statistical analyses
-
-Facilitates descriptor computation and alignment-free analyses
-
-Typical use cases
-
-Structural dataset standardization
-
-Preparing inputs for custom bioinformatics tools
-
-Ensuring reproducibility across PDB versions
-
-Example
-```python 
-from libraryPDB import reindex_residues
-
-reindex_residues("input.pdb", "reindexed.pdb")
-
-```
-
 📐 center_structure
 
 Translate the structure so that its Cα centroid lies at the origin (0, 0, 0).
@@ -621,36 +583,6 @@ This approximates the largest spatial extent of the protein.
 from libraryPDB import max_ca_distance
 ```
 
-🧩 Structural completeness
-missing_residue_ratio
-
-Estimate the fraction of missing residues based on residue index gaps.
-
-This helps distinguish:
-
-Full-length structures
-
-Partially crystallized domains
-
-Truncated constructs
-
-```python 
-from libraryPDB import missing_residue_ratio
-```
-
-🧠 Coarse secondary structure proxy
-secondary_structure_ratio
-
-Estimate local structural regularity using Cα–Cα distances.
-
-A short distance between consecutive Cα atoms is interpreted as
-a proxy for ordered secondary structure.
-
-⚠️ This is a heuristic, not a DSSP replacement.
-
-```python 
-from libraryPDB import secondary_structure_ratio
-```
 
 🧊 Compactness and packing
 compactness_index
@@ -893,9 +825,6 @@ Number of residues, estimated from Cα atoms.
 num_atoms
 Total number of ATOM records.
 
-missing_residue_ratio
-Fraction of missing residues inferred from discontinuities in residue numbering.
-
 🧬 Amino acid composition
 
 glycine_ratio
@@ -918,9 +847,6 @@ Global measure of protein size and compactness.
 max_ca_distance
 Maximum internal distance between any two Cα atoms.
 
-secondary_structure_ratio
-Heuristic indicator of local compactness based on consecutive Cα distances.
-
 compactness_index
 Size-normalized compaction metric derived from the radius of gyration.
 
@@ -938,13 +864,11 @@ These descriptors enable quantitative comparison of global protein folds across 
   'num_chains': 1,
   'num_residues': 285,
   'num_atoms': 2280,
-  'missing_residue_ratio': 0.04,
   'glycine_ratio': 0.07,
   'hydrophobic_ratio': 0.38,
   'aa_composition': {...},
   'radius_of_gyration': 21.6,
   'max_ca_distance': 64.2,
-  'secondary_structure_ratio': 0.71,
   'compactness_index': 1.92,
   'ca_density': 0.0041
 }
