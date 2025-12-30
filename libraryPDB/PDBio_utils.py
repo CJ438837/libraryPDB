@@ -31,26 +31,6 @@ def normalize_chain_ids(pdb_file: str, out_file: str):
 
     _write_pdb_lines(new_lines, out_file)
 
-def reindex_residues(pdb_file: str, out_file: str):
-    lines = _parse_atom_lines(pdb_file)
-    resid_map = {}
-    next_resid = 1
-    last_resname_chain = None
-
-    new_lines = []
-    for line in lines:
-        resname = line[17:20]
-        chain_id = line[21]
-        key = (chain_id, resname)
-        if key not in resid_map:
-            resid_map[key] = next_resid
-            next_resid += 1
-        new_resid = resid_map[key]
-        new_line = line[:22] + f"{new_resid:>4}" + line[26:]
-        new_lines.append(new_line)
-
-    _write_pdb_lines(new_lines, out_file)
-
 def center_structure(pdb_file: str, out_file: str):
     ca_coords = []
     lines = _parse_atom_lines(pdb_file)
