@@ -110,19 +110,6 @@ def max_ca_distance(pdb_file: str) -> float:
 
     return max_dist
 
-def missing_residue_ratio(pdb_file: str) -> float:
-    ca_atoms = _parse_ca_atoms(pdb_file)
-
-    if len(ca_atoms) < 2:
-        return 0.0
-
-    resids = sorted(resid for _, resid, *_ in ca_atoms)
-    expected = resids[-1] - resids[0] + 1
-    missing = expected - len(resids)
-
-    return missing / expected
-
-
 
 import math
 from typing import List, Tuple
@@ -149,20 +136,7 @@ def _parse_ca_coords(pdb_file: str) -> List[Tuple[float, float, float]]:
             ca_coords.append((x, y, z))
     return ca_coords
 
-def secondary_structure_ratio(pdb_file: str) -> float:
-    ca_coords = _parse_ca_coords(pdb_file)
-    if len(ca_coords) < 2:
-        return 0.0
 
-    count_ss = 0
-    for i in range(len(ca_coords) - 1):
-        x1, y1, z1 = ca_coords[i]
-        x2, y2, z2 = ca_coords[i+1]
-        d = math.sqrt((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2)
-        if d < 4.0:  # heuristique
-            count_ss += 1
-
-    return count_ss / (len(ca_coords) - 1)
 
 def compactness_index(pdb_file: str) -> float:
     ca_coords = _parse_ca_coords(pdb_file)
