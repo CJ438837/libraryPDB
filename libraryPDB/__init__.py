@@ -6,13 +6,6 @@ Lightweight Python library for large-scale analysis of PDB structures.
 """
 
 # ---------------------------
-# Core I/O utilities
-# ---------------------------
-from .PDBio_utils import (
-    reindex_residues,
-)
-
-# ---------------------------
 # Structural descriptors
 # ---------------------------
 from .PDBdescriptors import (
@@ -23,8 +16,6 @@ from .PDBdescriptors import (
     hydrophobic_ratio,
     radius_of_gyration,
     max_ca_distance,
-    missing_residue_ratio,
-    secondary_structure_ratio,
     compactness_index,
     ca_density,
 )
@@ -70,8 +61,6 @@ from .PDBparser import (
 # Public API
 # ---------------------------
 __all__ = [
-    # I/O
-    "reindex_residues",
 
     # Descriptors
     "num_residues",
@@ -81,8 +70,6 @@ __all__ = [
     "hydrophobic_ratio",
     "radius_of_gyration",
     "max_ca_distance",
-    "missing_residue_ratio",
-    "secondary_structure_ratio",
     "compactness_index",
     "ca_density",
 
